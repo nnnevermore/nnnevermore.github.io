@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    WTG安装和初始化 |  sadwin
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+<link rel="alternate" href="/atom.xml" title="sadwin" type="application/atom+xml">
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-WTG安装和初始化" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  WTG安装和初始化
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/08/WTG%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96/" class="article-date">
+  <time datetime="2020-04-08T08:04:26.000Z" itemprop="datePublished">2020-04-08</time>
+</a>
+      
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.6k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <p><a href="https://docs.microsoft.com/en-us/windows/deployment/planning/windows-to-go-overview" target="_blank" rel="noopener">WTG（windows to go）</a>是什么，想必不用多做介绍。下面是安装和配置的过程。</p>
+<p>WTG的制作过程，有很多种方案：</p>
+<ol>
+<li>官方工具</li>
+<li>Rufus</li>
+<li>WTGA（WTG助手，国产开源）</li>
+<li>AOMEI Partition Assistant</li>
+</ol>
+<p>具体用法就不赘述了，自行google即可。其中，1和2只有在制作WTG的宿主系统（也就是本机的系统）为windows10才有效，3和4都支持在win7上制作更高版本的WTG系统。不过有一点需要注意：制作过程中需要windows镜像中的install.wim文件（在source目录）。但是，如果使用<a href="https://www.microsoft.com/zh-cn/software-download/windows10" target="_blank" rel="noopener">Microsoft官方工具</a>（运行工具之后有直接下载iso文件的选项）下载的iso文件的话，目前的最新版本是没有install.wim了，取而代之的是一个install.esd文件，而WTGA虽然号称支持esd文件，但是实际使用过程中却造成失败。AOMEI则只支持install.wim。所以必须的已不是将esd文件转换为wim文件，这一步可以通过<a href="https://www.chuyu.me/zh-Hans/" target="_blank" rel="noopener">dism++</a>可以很方便转换。</p>
+<h2 id="初始化设置"><a href="#初始化设置" class="headerlink" title="初始化设置"></a>初始化设置</h2><p>安装好系统后，配置一下，使其更加易用。</p>
+<h3 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a><code>shadowsocks</code></h3><p>客户端备份: <a href="/2020/04/08/WTG%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96/ShadowsocksR-win-4.9.1.zip" title="ShadowsocksR-win-4.9.1.zip">ShadowsocksR-win-4.9.1.zip</a></p>
+<p>配置好后记得开启本地http代理</p>
+<h3 id="utools"><a href="#utools" class="headerlink" title="utools"></a><a href="https://www.u.tools/" target="_blank" rel="noopener"><code>utools</code></a></h3><p>方便易用，风头正劲的新型软件。</p>
+<h3 id="scoop"><a href="#scoop" class="headerlink" title="scoop"></a><a href="https://scoop.sh/" target="_blank" rel="noopener"><code>scoop</code></a></h3><p>安装步骤：</p>
+<ol>
+<li>打开powershell</li>
+<li>执行 <code>Set-ExecutionPolicy RemoteSigned -scope CurrentUser</code></li>
+<li>执行 <code>Invoke-Expression (New-Object System.Net.WebClient).DownloadString(&#39;https://get.scoop.sh&#39;)</code> 或者简短版本 <code>iwr -useb get.scoop.sh | iex</code>.</li>
+</ol>
+<p>安装完scoop后，首先安装两个包：<code>7zip</code>和<code>git</code>, scoop会自动使用系统代理，配置了ss的话，速度应该比较正常。<br>git安装好后，设置代理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy 'http://127.0.0.1:1080'</span><br><span class="line">git config --global https.proxy 'https://127.0.0.1:1080'</span><br></pre></td></tr></table></figure>
+<p>或sock5代理：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.proxy 'sock5://127.0.0.1:1080'</span><br><span class="line">git config --global https.proxy 'sock5://127.0.0.1:1080'</span><br></pre></td></tr></table></figure>
+<p>之后可以添加几个bucket:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bear            (scoop bucket add bear https://github.com/AStupidBear/scoop-bear)                             </span><br><span class="line">extras                                       </span><br><span class="line">java                                         </span><br><span class="line">main                                         </span><br><span class="line">TheRandomLabs   (scoop bucket add TheRandomLabs https://github.com/TheRandomLabs/Scoop-Bucket.git)                            </span><br><span class="line">versions</span><br></pre></td></tr></table></figure>
+
+<p>之后，安装其他工具，如果安装了aria2的话，scoop会调用它来下载，具体可以配置，目前已安装的包列表如下：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">PS C:\Data\Blog\nevermore&gt; scoop list      </span><br><span class="line">Installed apps:                            </span><br><span class="line">                                           </span><br><span class="line">  <span class="number">7</span>zip <span class="number">19.00</span>                               </span><br><span class="line">  aria2 <span class="number">1.35</span>.<span class="number">0</span><span class="literal">-1</span>                           </span><br><span class="line">  aria<span class="literal">-ng</span><span class="literal">-gui</span> <span class="number">3.1</span>.<span class="number">0</span> [<span class="type">extras</span>]               </span><br><span class="line">  conemu <span class="number">19.10</span>.<span class="number">12</span> [<span class="type">extras</span>]                 </span><br><span class="line">  conemu<span class="literal">-color</span><span class="literal">-themes</span> ayu<span class="literal">-theme</span> [<span class="type">extras</span>]   </span><br><span class="line">  dismplusplus <span class="number">10.1</span>.<span class="number">1001.10</span> [<span class="type">extras</span>]       </span><br><span class="line">  everything <span class="number">1.4</span>.<span class="number">1.969</span> [<span class="type">extras</span>]            </span><br><span class="line">  ffmpeg <span class="number">4.2</span>.<span class="number">2</span>                             </span><br><span class="line">  firefox <span class="number">75.0</span> [<span class="type">extras</span>]                    </span><br><span class="line">  git <span class="number">2.26</span>.<span class="number">0</span>.windows.<span class="number">1</span>                     </span><br><span class="line">  git<span class="literal">-lfs</span> <span class="number">2.10</span>.<span class="number">0</span>                           </span><br><span class="line">  googlechrome <span class="number">80.0</span>.<span class="number">3987.163</span> [<span class="type">extras</span>]      </span><br><span class="line">  hexo<span class="literal">-blog</span><span class="literal">-client</span> <span class="number">1.2</span>.<span class="number">9</span> [<span class="type">extras</span>]          </span><br><span class="line">  hexo<span class="literal">-client</span> <span class="number">1.3</span>.<span class="number">3</span> [<span class="type">extras</span>]               </span><br><span class="line">  miniconda3 <span class="number">4.7</span>.<span class="number">12.1</span> [<span class="type">extras</span>]             </span><br><span class="line">  nmap <span class="number">7.80</span>                                </span><br><span class="line">  nodejs <span class="number">13.12</span>.<span class="number">0</span>                           </span><br><span class="line">  potplayer <span class="number">200317</span> [<span class="type">extras</span>]                </span><br><span class="line">  qttabbar <span class="number">1038</span> [<span class="type">bear</span>]                     </span><br><span class="line">  steam nightly<span class="literal">-20200408</span> [<span class="type">extras</span>]          </span><br><span class="line">  sublime<span class="literal">-text</span> <span class="number">3.2</span>.<span class="number">2</span><span class="literal">-3211</span> [<span class="type">extras</span>]         </span><br><span class="line">  sudo <span class="number">0.2020</span>.<span class="number">01.26</span>                        </span><br><span class="line">  teamviewer <span class="number">15.4</span>.<span class="number">4445</span> [<span class="type">extras</span>]            </span><br><span class="line">  <span class="built_in">update-qttabbar</span> <span class="number">1040</span> [<span class="type">bear</span>]              </span><br><span class="line">  vcredist2010 <span class="number">10.0</span>.<span class="number">40219</span> [<span class="type">extras</span>]         </span><br><span class="line">  vcredist2019 <span class="number">14.24</span>.<span class="number">28127.4</span> [<span class="type">extras</span>]      </span><br><span class="line">  vlc <span class="number">3.0</span>.<span class="number">8</span> [<span class="type">extras</span>]                       </span><br><span class="line">  vscode<span class="literal">-insiders</span> nightly<span class="literal">-20200408</span> [<span class="type">extras</span>]</span><br><span class="line">  wireshark <span class="number">3.2</span>.<span class="number">2</span> [<span class="type">extras</span>]                 </span><br><span class="line">  youtube<span class="literal">-dl</span> <span class="number">2020.03</span>.<span class="number">24</span>                    </span><br><span class="line">  youtube<span class="literal">-dl</span><span class="literal">-gui</span> <span class="number">0.4</span> [<span class="type">extras</span>]</span><br></pre></td></tr></table></figure>
+
+<p>最好用sudo来执行安装。</p>
+<p>scoop安装的包有时候本该加入右键菜单的却没有自动加，而且不像vscode安装完还有提示该执行某个路径下的reg。所以需要手动加入，这里加入一些常用的：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line">How to</span><br><span class="line"></span><br><span class="line">Save the code below as foobar.reg and execute it.</span><br><span class="line">Notice ! Modify path !</span><br><span class="line"></span><br><span class="line">    Modify the path to your path! For instance: C:\\Users\\foobar\\scoop\\apps\\git\\current\\git-bash.exe to \\you\\dope\\path\\sth.exe.</span><br><span class="line">    Save the content as .reg file and execute it as administrator.</span><br><span class="line"></span><br><span class="line">Install and Uninstall Context</span><br><span class="line">Sublime-text</span><br><span class="line"></span><br><span class="line">Install:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &amp;Sublime]</span><br><span class="line">@="Open with &amp;Sublime"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &amp;Sublime\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe\" \"%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &amp;Sublime]</span><br><span class="line">@="Open with &amp;Sublime"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &amp;Sublime\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe\" \"%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &amp;Sublime]</span><br><span class="line">@="Open with &amp;Sublime"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &amp;Sublime\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\sublime-text\\3211\\sublime_text.exe\" \"%V\""</span><br><span class="line"></span><br><span class="line">Uninstall:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &amp;Sublime]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with &amp;Sublime\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &amp;Sublime]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with &amp;Sublime\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &amp;Sublime]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with &amp;Sublime\command]</span><br><span class="line"></span><br><span class="line">emacs</span><br><span class="line"></span><br><span class="line">Install:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with emacs]</span><br><span class="line">@="Open with emacs"</span><br><span class="line">"Icon"="C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\*\shell\Open with emacs\command]</span><br><span class="line">@="\"C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe\" \"%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with emacs]</span><br><span class="line">@="Open with emacs"</span><br><span class="line">"Icon"="C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with emacs\command]</span><br><span class="line">@="\"C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe\" \"%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with emacs]</span><br><span class="line">@="Open with emacs"</span><br><span class="line">"Icon"="C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe"</span><br><span class="line">[HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with emacs\command]</span><br><span class="line">@="\"C:\\Users\\foobar\\scoop\\apps\\emacs\\current\\bin\\runemacs.exe\" \"%V\""</span><br><span class="line"></span><br><span class="line">Uninstall:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with emacs]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with emacs\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with emacs]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with emacs\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with emacs]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with emacs\command]</span><br><span class="line"></span><br><span class="line">Vim</span><br><span class="line"></span><br><span class="line">Install:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\*\shell\nvim]</span><br><span class="line">@="Open With NVIM"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe"</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\*\shell\nvim\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe\"  \"%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\nvim]</span><br><span class="line">@="Open With NVIM"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe"</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\nvim\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe\"  \"%V\""</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\shell\nvim]</span><br><span class="line">@="Open With NVIM"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe"</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\shell\nvim\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\neovim\\current\\bin\\nvim-qt.exe\"  \"%1\""</span><br><span class="line"></span><br><span class="line">Unistall:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with NVIM]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\Open with NVIM\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with NVIM]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\Open with NVIM\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with NVIM]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\Open with NVIM\command]</span><br><span class="line"></span><br><span class="line">Git bash</span><br><span class="line"></span><br><span class="line">Inistall:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\shell\git_shell]</span><br><span class="line">@="Git Ba&amp;sh Here"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\git\\current\\git-bash.exe"</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\shell\git_shell\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\git\\current\\git-bash.exe\" \"--cd=%1\""</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell]</span><br><span class="line">@="Git Ba&amp;sh Here"</span><br><span class="line">"Icon"="C:\\Users\\Notebook\\scoop\\apps\\git\\current\\git-bash.exe"</span><br><span class="line"></span><br><span class="line">[HKEY_CLASSES_ROOT\Directory\Background\shell\git_shell\command]</span><br><span class="line">@="\"C:\\Users\\Notebook\\scoop\\apps\\git\\current\\git-bash.exe\" \"--cd=%v.\""</span><br><span class="line"></span><br><span class="line">Unistall:</span><br><span class="line"></span><br><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line"></span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\git_bash]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\*\shell\git_bash\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\git_bash]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\shell\git_bash\command]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\git_bash]</span><br><span class="line">[-HKEY_CURRENT_USER\Software\Classes\Directory\Background\shell\git_bash\command]</span><br><span class="line"></span><br><span class="line">Difference</span><br><span class="line"></span><br><span class="line">Method 1 you need to edit via regedit to change the value to your git-bash path.</span><br><span class="line"></span><br><span class="line">Method 2 you just edit here and run it.</span><br><span class="line"></span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>有一个有用的网站可以检索scoop的包：<a href="https://scoop.if-she.com/" target="_blank" rel="noopener">Scoop App</a></p>
+<p>最后可以安装<a href="https://chocolatey.org/install" target="_blank" rel="noopener">chocolatey</a>来和scoop互相补充:<br>管理员权限的powershell中执行：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> Bypass <span class="literal">-Scope</span> <span class="keyword">Process</span> <span class="literal">-Force</span>; [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol = [<span class="type">System.Net.ServicePointManager</span>]::SecurityProtocol <span class="operator">-bor</span> <span class="number">3072</span>; iex ((<span class="built_in">New-Object</span> System.Net.WebClient).DownloadString(<span class="string">'https://chocolatey.org/install.ps1'</span>))</span><br></pre></td></tr></table></figure>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/04/08/WTG%E5%AE%89%E8%A3%85%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/WTG/" rel="tag">WTG</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+
+  
+
+  
+  
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#vcomments',
+        app_id: '',
+        app_key: '',
+        path: window.location.pathname,
+        notify: 'false',
+        verify: 'false',
+        avatar: 'monsterid',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2015-2020
+        sadwin
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="sadwin"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2019/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['江头未是风波恶 别有人间行路难', '车到山前必有路 船到桥头自然直', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
