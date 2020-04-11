@@ -59,7 +59,7 @@ versions
 
 之后，安装其他工具，如果安装了aria2的话，scoop会调用它来下载，具体可以配置，目前已安装的包列表如下：
 ```powershell
-PS C:\Data\Blog\nevermore> scoop list      
+PS C:\windows\system32> scoop list         
 Installed apps:                            
                                            
   7zip 19.00                               
@@ -67,24 +67,30 @@ Installed apps:
   aria-ng-gui 3.1.0 [extras]               
   conemu 19.10.12 [extras]                 
   conemu-color-themes ayu-theme [extras]   
+  diskgenius 5.2.0.884 [extras]            
   dismplusplus 10.1.1001.10 [extras]       
   everything 1.4.1.969 [extras]            
   ffmpeg 4.2.2                             
   firefox 75.0 [extras]                    
+  frp 0.32.1                               
   git 2.26.0.windows.1                     
   git-lfs 2.10.0                           
   googlechrome 80.0.3987.163 [extras]      
   hexo-blog-client 1.2.9 [extras]          
-  hexo-client 1.3.3 [extras]               
+  listen1desktop 2.5.1 [extras]            
   miniconda3 4.7.12.1 [extras]             
+  mobaxterm 20.1 [extras]                  
+  neovim 0.4.3                             
   nmap 7.80                                
   nodejs 13.12.0                           
+  officetoolplus 7.5.0.3 [h404bi_dorado]   
   potplayer 200317 [extras]                
   qttabbar 1038 [bear]                     
   steam nightly-20200408 [extras]          
   sublime-text 3.2.2-3211 [extras]         
   sudo 0.2020.01.26                        
   teamviewer 15.4.4445 [extras]            
+  Telegram 2.0.1 [extras]                  
   update-qttabbar 1040 [bear]              
   vcredist2010 10.0.40219 [extras]         
   vcredist2019 14.24.28127.4 [extras]      
@@ -92,7 +98,7 @@ Installed apps:
   vscode-insiders nightly-20200408 [extras]
   wireshark 3.2.2 [extras]                 
   youtube-dl 2020.03.24                    
-  youtube-dl-gui 0.4 [extras]              
+  youtube-dl-gui 0.4 [extras]                        
 ```
 
 最好用sudo来执行安装。
