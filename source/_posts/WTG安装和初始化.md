@@ -100,6 +100,7 @@ Installed apps:
   youtube-dl 2020.03.24                    
   youtube-dl-gui 0.4 [extras]                        
 ```
+这是完整列表: {% asset_link scoop_list_export.txt %}
 
 最好用sudo来执行安装。
 
