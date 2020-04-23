@@ -45,4 +45,20 @@
         <tag>Windows</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Scoop安装LLVM遇见的问题</title>
+    <url>/2020/04/23/Scoop%E5%AE%89%E8%A3%85LLVM%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>使用<code>scoop</code>安装<code>llvm</code>很简单：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">scoop install llvm</span><br></pre></td></tr></table></figure>
+
+<p>不过安装过程中出现了一点问题，在结束阶段出现了这个：<img src="/2020/04/23/Scoop%E5%AE%89%E8%A3%85LLVM%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/error.png" class=""><br>因此要安装msvc。</p>
+<p>scoop中没有msvc的安装途径，不过我们可以通过chocolate来安装。</p>
+<p>安装过程中发现本机的.NET Framework好像有些不正常，导致出现clr 8000405错误，但不知道是什么原因导致的（可能是老婆上次乱下东西给我装了一堆流氓软件的缘故吧- -！）。不过没关系，可以通过choco来强制重新安装.NET：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">choco install dotnetfx --force</span><br></pre></td></tr></table></figure>
+<p>之后就准备msvc的安装了。</p>
+<p>首先安装vcbuildtool：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">choco install visualstudio2019buildtools</span><br></pre></td></tr></table></figure>
+<p>安装完成后，启动安装过程中被顺带安装上的微软官方程序<code>visual studio installer</code>。选择修复，之后选中Microsoft VC++支持安装就好了。</p>
+]]></content>
+  </entry>
 </search>

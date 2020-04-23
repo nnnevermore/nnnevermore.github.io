@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-04-18T12:54:04.829Z</updated>
+  <updated>2020-04-23T12:11:06.233Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scoop安装LLVM遇见的问题</title>
+    <link href="http://yoursite.com/2020/04/23/Scoop%E5%AE%89%E8%A3%85LLVM%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2020/04/23/Scoop%E5%AE%89%E8%A3%85LLVM%E9%81%87%E8%A7%81%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-04-23T10:30:23.000Z</published>
+    <updated>2020-04-23T12:11:06.233Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;使用&lt;code&gt;scoop&lt;/code&gt;安装&lt;code&gt;llvm&lt;/code&gt;很简单：&lt;/p&gt;
+&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>WTG安装和初始化</title>
